@@ -15,15 +15,17 @@ public class parcelReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().matches("YBandSHU.A_CUSTOM_INTENT")){
+        Toast.makeText(context, "parcelReceiverOnReceive", Toast.LENGTH_LONG).show();
+        String action = intent.getAction();
+        if (action.equals("YBandSHU.A_CUSTOM_INTENT")){
             initChannels(context);
 
 
-            Notification.Builder builder = new Notification.Builder(context);
-            builder.setSmallIcon(android.R.drawable.picture_frame)
+            Notification notification = new Notification.Builder(context).setSmallIcon(android.R.drawable.ic_dialog_info)
                     .setContentTitle("Parcel Notification")
-                    .setContentText("Choose how to handle the parcel...");
-            Notification notification = builder.build();
+                    .setContentText("Choose how to handle the parcel...")
+                    .build();
+//            Notification notification = builder.build();
             notification.defaults = notification.DEFAULT_ALL;
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(1, notification);
